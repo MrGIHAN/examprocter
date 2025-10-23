@@ -1,329 +1,236 @@
 // src/components/Hero.js
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Container,
   Typography,
   Button,
+  Stack,
   Grid,
-  Card,
-  CardContent,
-  alpha,
-  useTheme,
   Fade,
 } from '@mui/material';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation, EffectFade } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SecurityIcon from '@mui/icons-material/Security';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
-import SpeedIcon from '@mui/icons-material/Speed';
 
 const Hero = ({ id }) => {
-  const theme = useTheme();
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const backgroundSlides = [
-    {
-      image: 'https://images.unsplash.com/photo-1582573618380-2d6d41d5d58f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'AI-Powered Exam Integrity',
-      subtitle: 'Revolutionizing online assessment with advanced artificial intelligence'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Real-Time Monitoring',
-      subtitle: 'Advanced proctoring solutions for secure remote examinations'
-    },
-    {
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      title: 'Secure & Reliable',
-      subtitle: 'Ensuring academic integrity in the digital learning environment'
-    }
-  ];
-
-  const features = [
-    {
-      icon: <SecurityIcon sx={{ fontSize: 40 }} />,
-      title: 'Advanced Security',
-      description: 'Military-grade encryption and AI-powered monitoring'
-    },
-    {
-      icon: <AnalyticsIcon sx={{ fontSize: 40 }} />,
-      title: 'Real-time Analytics',
-      description: 'Comprehensive dashboards with live monitoring'
-    },
-    {
-      icon: <SpeedIcon sx={{ fontSize: 40 }} />,
-      title: 'Lightning Fast',
-      description: 'Optimized performance for seamless experience'
-    }
-  ];
+  const [visible, setVisible] = useState(false);
+  useEffect(() => setVisible(true), []);
 
   return (
-    <Box id={id} sx={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
-      {/* Background Slider */}
-      <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
-        <Swiper
-          spaceBetween={0}
-          centeredSlides={true}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          pagination={{ clickable: true }}
-          navigation={true}
-          effect={'fade'}
-          modules={[Autoplay, Pagination, Navigation, EffectFade]}
-          onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
-          style={{ height: '100%' }}
-        >
-          {backgroundSlides.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <Box
-                sx={{
-                  position: 'relative',
-                  height: '100vh',
-                  background: `linear-gradient(135deg, ${alpha('#1e293b', 0.8)} 0%, ${alpha('#334155', 0.7)} 100%), url(${slide.image})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </Box>
-
-      {/* Content Overlay */}
-      <Box sx={{ position: 'relative', zIndex: 2, minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
-        <Container maxWidth="xl">
-          <Grid container spacing={6} alignItems="center">
-            {/* Left Content */}
-            <Grid item xs={12} lg={6}>
-              <Fade in={true} timeout={1000}>
-                <Box sx={{ color: 'white' }}>
-                  {/* Badge */}
-                  <Box
-                    sx={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      px: 3,
-                      py: 1,
-                      mb: 3,
-                      borderRadius: 25,
-                      background: alpha(theme.palette.primary.main, 0.2),
-                      border: `1px solid ${alpha(theme.palette.primary.main, 0.3)}`,
-                      backdropFilter: 'blur(10px)',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: '50%',
-                        background: theme.palette.primary.main,
-                        mr: 1,
-                        animation: 'pulse 2s infinite',
-                      }}
-                    />
-                    <Typography
-                      variant="body2"
-                      sx={{
-                        fontWeight: 600,
-                        color: theme.palette.primary.light,
-                        textTransform: 'uppercase',
-                        letterSpacing: 1,
-                      }}
-                    >
-                      Next-Gen Exam Proctoring
-                    </Typography>
-                  </Box>
-
-                  {/* Main Title */}
-                  <Typography
-                    variant="h1"
-                    sx={{
-                      fontWeight: 800,
-                      fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
-                      lineHeight: 1.1,
-                      mb: 3,
-                      background: 'linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                    }}
-                  >
-                    Revolutionizing{' '}
-                    <Box
-                      component="span"
-                      sx={{
-                        background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                      }}
-                    >
-                      Exam Integrity
-                    </Box>
-                  </Typography>
-
-                  {/* Subtitle */}
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      color: alpha('#fff', 0.9),
-                      mb: 4,
-                      fontWeight: 400,
-                      lineHeight: 1.6,
-                      fontSize: { xs: '1.1rem', md: '1.25rem' },
-                    }}
-                  >
-                    {backgroundSlides[currentSlide].subtitle}
-                  </Typography>
-
-                  {/* CTA Buttons */}
-                  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', mb: 6 }}>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      className="btn-gradient"
-                      sx={{
-                        px: 4,
-                        py: 1.5,
-                        borderRadius: 3,
-                        fontSize: '1.1rem',
-                        fontWeight: 600,
-                      }}
-                    >
-                      Get Started Free
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      size="large"
-                      startIcon={<PlayArrowIcon />}
-                      sx={{
-                        px: 4,
-                        py: 1.5,
-                        borderRadius: 3,
-                        fontSize: '1.1rem',
-                        fontWeight: 600,
-                        borderColor: 'white',
-                        color: 'white',
-                        '&:hover': {
-                          borderColor: 'white',
-                          background: alpha('#fff', 0.1),
-                          transform: 'translateY(-2px)',
-                        },
-                      }}
-                    >
-                      Watch Demo
-                    </Button>
-                  </Box>
-
-                  {/* Stats */}
-                  <Grid container spacing={4} sx={{ maxWidth: 400 }}>
-                    {[
-                      { value: '99.9%', label: 'Accuracy Rate' },
-                      { value: '24/7', label: 'Monitoring' },
-                      { value: '50K+', label: 'Exams Proctored' },
-                    ].map((stat, index) => (
-                      <Grid item xs={4} key={index}>
-                        <Box sx={{ textAlign: 'center' }}>
-                          <Typography 
-                            variant="h4" 
-                            fontWeight="bold" 
-                            sx={{ 
-                              background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
-                              WebkitBackgroundClip: 'text',
-                              WebkitTextFillColor: 'transparent',
-                              mb: 0.5
-                            }}
-                          >
-                            {stat.value}
-                          </Typography>
-                          <Typography variant="body2" sx={{ color: alpha('#fff', 0.8), fontSize: '0.875rem' }}>
-                            {stat.label}
-                          </Typography>
-                        </Box>
-                      </Grid>
-                    ))}
-                  </Grid>
-                </Box>
-              </Fade>
-            </Grid>
-
-            {/* Right Content - Feature Cards */}
-            <Grid item xs={12} lg={6}>
-              <Fade in={true} timeout={1000} style={{ transitionDelay: '200ms' }}>
-                <Grid container spacing={3}>
-                  {features.map((feature, index) => (
-                    <Grid item xs={12} md={4} key={index}>
-                      <Card
-                        className="hover-lift"
-                        sx={{
-                          height: '100%',
-                          borderRadius: 4,
-                          background: `linear-gradient(135deg, ${alpha('#ffffff', 0.1)} 0%, ${alpha('#ffffff', 0.05)} 100%)`,
-                          backdropFilter: 'blur(20px)',
-                          border: `1px solid ${alpha('#ffffff', 0.1)}`,
-                          color: 'white',
-                        }}
-                      >
-                        <CardContent sx={{ p: 3, textAlign: 'center' }}>
-                          <Box
-                            sx={{
-                              color: theme.palette.primary.light,
-                              mb: 2,
-                              display: 'flex',
-                              justifyContent: 'center',
-                            }}
-                          >
-                            {feature.icon}
-                          </Box>
-                          <Typography variant="h6" fontWeight="bold" gutterBottom sx={{ fontSize: '1.1rem' }}>
-                            {feature.title}
-                          </Typography>
-                          <Typography variant="body2" sx={{ color: alpha('#fff', 0.8), lineHeight: 1.5 }}>
-                            {feature.description}
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Fade>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box>
-
-      {/* Scroll Indicator */}
+    <Box
+      id={id}
+      sx={{
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        background: `radial-gradient(circle at 30% 50%, rgba(99,102,241,0.25) 0%, transparent 70%),
+                     radial-gradient(circle at 70% 80%, rgba(139,92,246,0.25) 0%, transparent 70%),
+                     linear-gradient(135deg, #0f172a 0%, #1a1a2e 100%)`,
+        color: 'white',
+      }}
+    >
+      {/* Animated glowing orbs */}
       <Box
         sx={{
           position: 'absolute',
-          bottom: 40,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          zIndex: 2,
-          color: 'white',
-          textAlign: 'center',
+          width: 600,
+          height: 600,
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(99,102,241,0.4) 0%, transparent 70%)',
+          top: '-20%',
+          left: '-10%',
+          filter: 'blur(120px)',
+          animation: 'float 10s ease-in-out infinite',
         }}
-      >
-        <Typography variant="body2" sx={{ mb: 1, color: alpha('#fff', 0.7) }}>
-          Scroll to explore
-        </Typography>
-        <Box
-          sx={{
-            width: 2,
-            height: 40,
-            background: 'linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%)',
-            borderRadius: 2,
-            mx: 'auto',
-            animation: 'float 2s ease-in-out infinite',
-          }}
-        />
-      </Box>
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          width: 500,
+          height: 500,
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(16,185,129,0.3) 0%, transparent 70%)',
+          bottom: '-10%',
+          right: '-10%',
+          filter: 'blur(120px)',
+          animation: 'float 12s ease-in-out infinite',
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 2 }}>
+        <Fade in={visible} timeout={800}>
+          <Grid
+            container
+            spacing={6}
+            alignItems="center"
+            justifyContent="center"
+            textAlign="center"
+          >
+            <Grid item xs={12} md={10} lg={8}>
+              {/* Tagline */}
+              <Typography
+                variant="body1"
+                sx={{
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  letterSpacing: 2,
+                  color: 'rgba(255,255,255,0.7)',
+                  mb: 2,
+                }}
+              >
+                Empowering Integrity with AI
+              </Typography>
+
+              {/* Title */}
+              <Typography
+                variant="h1"
+                sx={{
+                  fontWeight: 900,
+                  fontSize: { xs: '2.8rem', sm: '3.8rem', md: '5rem' },
+                  lineHeight: 1.1,
+                  mb: 3,
+                  letterSpacing: '-0.02em',
+                  background:
+                    'linear-gradient(90deg, #6366f1 0%, #8b5cf6 40%, #10b981 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                AI-Powered Exam Proctoring System
+              </Typography>
+
+              {/* Subtitle */}
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'rgba(255,255,255,0.8)',
+                  maxWidth: 720,
+                  mx: 'auto',
+                  mb: 5,
+                  fontWeight: 400,
+                  lineHeight: 1.7,
+                  fontSize: { xs: '1rem', md: '1.25rem' },
+                }}
+              >
+                ExamProcter ensures secure, reliable online assessments using advanced AI, real-time
+                monitoring, and identity verification — helping institutions maintain academic
+                integrity effortlessly.
+              </Typography>
+
+              {/* Buttons */}
+              <Stack
+                direction={{ xs: 'column', sm: 'row' }}
+                spacing={2}
+                justifyContent="center"
+                sx={{ mb: 8 }}
+              >
+                <Button
+                  variant="contained"
+                  size="large"
+                  endIcon={<ArrowForwardIcon />}
+                  sx={{
+                    px: 5,
+                    py: 1.8,
+                    borderRadius: 4,
+                    fontWeight: 700,
+                    fontSize: '1.05rem',
+                    textTransform: 'none',
+                    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                    boxShadow:
+                      '0 12px 32px rgba(99,102,241,0.35), 0 0 0 1px rgba(255,255,255,0.15)',
+                    '&:hover': {
+                      transform: 'translateY(-3px)',
+                      background: 'linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%)',
+                    },
+                    transition: 'all 0.35s ease',
+                  }}
+                >
+                  Get Started
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="large"
+                  startIcon={<PlayArrowIcon />}
+                  sx={{
+                    px: 5,
+                    py: 1.8,
+                    borderRadius: 4,
+                    fontWeight: 700,
+                    fontSize: '1.05rem',
+                    textTransform: 'none',
+                    borderColor: 'rgba(255,255,255,0.4)',
+                    color: 'white',
+                    background: 'rgba(255,255,255,0.1)',
+                    backdropFilter: 'blur(12px)',
+                    '&:hover': {
+                      background: 'rgba(255,255,255,0.25)',
+                      borderColor: 'rgba(255,255,255,0.6)',
+                      transform: 'translateY(-3px)',
+                    },
+                    transition: 'all 0.35s ease',
+                  }}
+                >
+                  Watch Demo
+                </Button>
+              </Stack>
+
+              {/* Stats */}
+              <Grid
+                container
+                spacing={4}
+                justifyContent="center"
+                sx={{ maxWidth: 600, mx: 'auto' }}
+              >
+                {[
+                  { value: '99.9%', label: 'Accuracy Rate' },
+                  { value: '24/7', label: 'Support' },
+                  { value: '50K+', label: 'Exams Monitored' },
+                ].map((stat, index) => (
+                  <Grid item xs={4} key={index}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontWeight: 900,
+                        background:
+                          'linear-gradient(135deg, #6366f1 0%, #10b981 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        mb: 0.5,
+                      }}
+                    >
+                      {stat.value}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: 'rgba(255,255,255,0.7)',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {stat.label}
+                    </Typography>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </Grid>
+        </Fade>
+      </Container>
+
+      {/* Animation Keyframes */}
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+          }
+        `}
+      </style>
     </Box>
   );
 };

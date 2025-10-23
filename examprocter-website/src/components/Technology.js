@@ -6,222 +6,225 @@ import {
   Typography,
   Grid,
   Card,
-  CardContent,
-  Chip,
+  Stack,
+  alpha,
   useTheme,
 } from '@mui/material';
+import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
+import StorageIcon from '@mui/icons-material/Storage';
+import MemoryIcon from '@mui/icons-material/Memory';
+import CloudIcon from '@mui/icons-material/Cloud';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
 
-const Technology = ({ id, setActiveSection }) => {
+const Technology = ({ id }) => {
   const theme = useTheme();
 
-  const technologies = [
+  const techStack = [
     {
-      name: "Python",
-      description: "Core programming language for AI and machine learning algorithms",
-      icon: "🐍",
-      category: "Backend & AI",
-      color: "linear-gradient(135deg, #FFD43B 0%, #FFA94D 100%)"
+      name: 'React.js',
+      description: 'Frontend framework for dynamic UI and seamless user experience.',
+      icon: <DeveloperModeIcon sx={{ fontSize: 36 }} />,
+      color: '#61DAFB',
     },
     {
-      name: "OpenCV",
-      description: "Computer vision library for real-time face detection and monitoring",
-      icon: "👁️",
-      category: "Computer Vision",
-      color: "linear-gradient(135deg, #10B981 0%, #34D399 100%)"
+      name: 'Spring Boot',
+      description: 'Backend framework ensuring secure RESTful API development.',
+      icon: <StorageIcon sx={{ fontSize: 36 }} />,
+      color: '#6DB33F',
     },
     {
-      name: "React",
-      description: "Frontend library for building responsive user interfaces",
-      icon: "⚛️",
-      category: "Web Development",
-      color: "linear-gradient(135deg, #61DAFB 0%, #21A4C4 100%)"
+      name: 'TensorFlow Lite',
+      description: 'Lightweight ML library optimized for on-device model inference.',
+      icon: <MemoryIcon sx={{ fontSize: 36 }} />,
+      color: '#FF6F00',
     },
     {
-      name: "Node.js",
-      description: "Runtime environment for server-side JavaScript execution",
-      icon: "⚡",
-      category: "Backend",
-      color: "linear-gradient(135deg, #68A063 0%, #3C873A 100%)"
+      name: 'Firebase',
+      description: 'Cloud platform for real-time data storage and authentication.',
+      icon: <CloudIcon sx={{ fontSize: 36 }} />,
+      color: '#FFCA28',
     },
     {
-      name: "TensorFlow",
-      description: "Machine learning framework for behavior analysis",
-      icon: "🧠",
-      category: "AI/ML",
-      color: "linear-gradient(135deg, #FF6B00 0%, #FF8C00 100%)"
+      name: 'Edge Impulse',
+      description: 'Platform for building and deploying TinyML models on embedded devices.',
+      icon: <AutoAwesomeIcon sx={{ fontSize: 36 }} />,
+      color: '#8B5CF6',
     },
     {
-      name: "MongoDB",
-      description: "NoSQL database for storing exam data and analytics",
-      icon: "🍃",
-      category: "Database",
-      color: "linear-gradient(135deg, #47A248 0%, #4DB33D 100%)"
-    }
-  ];
-
-  const achievements = [
-    {
-      title: "RuHET 2023",
-      description: "International Research Conference",
-      detail: "Research Paper Published in Journal of Innovations in Engineering and Technology"
-    }
+      name: 'TinyML',
+      description: 'Deploying machine learning at the edge for low-latency inference.',
+      icon: <IntegrationInstructionsIcon sx={{ fontSize: 36 }} />,
+      color: '#10B981',
+    },
   ];
 
   return (
-    <Box id={id} className="section-spacing" sx={{ bgcolor: 'background.paper' }}>
-      <Container maxWidth="xl">
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography variant="h2" fontWeight="bold" gutterBottom>
-            Tools & <span className="gradient-text">Technology</span>
+    <Box
+      id={id}
+      sx={{
+        py: { xs: 10, md: 14 },
+        background:
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)'
+            : 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Background Glow */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '-15%',
+          left: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.primary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-10%',
+          right: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.secondary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(120px)',
+          zIndex: 0,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
+        {/* Section Header */}
+        <Box sx={{ textAlign: 'center', mb: 10 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '2.5rem', md: '3.2rem' },
+              mb: 2,
+              background:
+                'linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Technology Stack
           </Typography>
-          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}>
-            Cutting-edge technologies powering our advanced exam proctoring platform
+          <Typography
+            variant="h6"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.7)'
+                  : 'text.secondary',
+              maxWidth: 800,
+              mx: 'auto',
+              lineHeight: 1.8,
+            }}
+          >
+            ExamProcter is powered by a robust combination of web, AI, and TinyML
+            technologies — enabling efficient, secure, and intelligent online assessments.
           </Typography>
         </Box>
 
-        <Grid container spacing={3} sx={{ mb: 8 }}>
-          {technologies.map((tech, index) => (
+        {/* Technology Grid */}
+        <Grid container spacing={4}>
+          {techStack.map((tech, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
               <Card
+                elevation={0}
                 sx={{
                   height: '100%',
-                  borderRadius: 3,
-                  transition: 'all 0.3s ease',
-                  border: `1px solid ${theme.palette.divider}`,
+                  borderRadius: 4,
+                  p: 4,
+                  textAlign: 'center',
+                  background:
+                    theme.palette.mode === 'dark'
+                      ? alpha('#1e293b', 0.7)
+                      : alpha('#ffffff', 0.95),
+                  border: `1px solid ${alpha(tech.color, 0.2)}`,
+                  boxShadow:
+                    theme.palette.mode === 'dark'
+                      ? '0 6px 24px rgba(0,0,0,0.4)'
+                      : '0 6px 28px rgba(0,0,0,0.08)',
+                  backdropFilter: 'blur(8px)',
+                  transition: 'all 0.35s ease',
                   '&:hover': {
                     transform: 'translateY(-8px)',
-                    boxShadow: `0 16px 40px ${theme.palette.primary.light}20`,
+                    boxShadow: `0 12px 36px ${alpha(tech.color, 0.25)}`,
                   },
                 }}
               >
-                <CardContent sx={{ p: 3 }}>
-                  <Box
-                    sx={{
-                      width: 60,
-                      height: 60,
-                      borderRadius: 3,
-                      background: tech.color,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '2rem',
-                      mb: 2,
-                    }}
-                  >
-                    {tech.icon}
-                  </Box>
-                  <Typography variant="h6" fontWeight="bold" gutterBottom>
-                    {tech.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2, lineHeight: 1.6 }}>
-                    {tech.description}
-                  </Typography>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Chip
-                      label={tech.category}
-                      size="small"
-                      sx={{
-                        bgcolor: 'primary.light',
-                        color: 'primary.contrastText',
-                      }}
-                    />
-                    <Box
-                      sx={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: '50%',
-                        bgcolor: 'success.main',
-                        animation: 'pulse 2s infinite',
-                      }}
-                    />
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-
-        {/* Achievements */}
-        <Box sx={{ mb: 6 }}>
-          <Typography variant="h4" fontWeight="bold" textAlign="center" gutterBottom>
-            Achievements
-          </Typography>
-          <Grid container spacing={3} justifyContent="center">
-            {achievements.map((achievement, index) => (
-              <Grid item xs={12} md={8} key={index}>
-                <Card
-                  sx={{
-                    borderRadius: 3,
-                    p: 4,
-                    textAlign: 'center',
-                    background: `linear-gradient(135deg, ${theme.palette.success.light}20 0%, ${theme.palette.info.light}20 100%)`,
-                    border: `1px solid ${theme.palette.success.light}30`,
-                  }}
-                >
+                <Stack spacing={2} alignItems="center">
                   <Box
                     sx={{
                       width: 80,
                       height: 80,
                       borderRadius: '50%',
-                      bgcolor: 'success.main',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      fontSize: '2.5rem',
-                      mx: 'auto',
-                      mb: 3,
+                      background: `linear-gradient(135deg, ${alpha(
+                        tech.color,
+                        0.3
+                      )}, transparent 70%)`,
+                      boxShadow: `0 0 20px ${alpha(tech.color, 0.25)}`,
+                      color: tech.color,
+                      animation: 'float 5s ease-in-out infinite',
                     }}
                   >
-                    🏆
+                    {tech.icon}
                   </Box>
-                  <Typography variant="h5" fontWeight="bold" gutterBottom>
-                    {achievement.title}
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 700,
+                      color: 'text.primary',
+                    }}
+                  >
+                    {tech.name}
                   </Typography>
-                  <Typography variant="body1" color="text.secondary" gutterBottom>
-                    {achievement.description}
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color:
+                        theme.palette.mode === 'dark'
+                          ? 'rgba(255,255,255,0.7)'
+                          : 'text.secondary',
+                      lineHeight: 1.7,
+                      maxWidth: 320,
+                    }}
+                  >
+                    {tech.description}
                   </Typography>
-                  <Typography variant="body2" color="success.main" fontWeight="medium">
-                    {achievement.detail}
-                  </Typography>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-
-        {/* Tech Stack Banner */}
-        <Card
-          sx={{
-            p: 4,
-            borderRadius: 4,
-            textAlign: 'center',
-            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-            color: 'white',
-            boxShadow: `0 8px 32px ${theme.palette.primary.light}40`,
-          }}
-        >
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Full-Stack Solution
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 4, opacity: 0.9 }}>
-            Integrated technology stack providing end-to-end exam proctoring capabilities
-          </Typography>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
-            {technologies.map((tech, index) => (
-              <Chip
-                key={index}
-                label={tech.name}
-                sx={{
-                  bgcolor: 'rgba(255, 255, 255, 0.2)',
-                  color: 'white',
-                  border: '1px solid rgba(255, 255, 255, 0.3)',
-                  backdropFilter: 'blur(10px)',
-                }}
-              />
-            ))}
-          </Box>
-        </Card>
+                </Stack>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
+
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+        `}
+      </style>
     </Box>
   );
 };

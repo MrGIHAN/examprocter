@@ -5,232 +5,320 @@ import {
   Container,
   Typography,
   Card,
-  CardContent,
-  Stepper,
-  Step,
-  StepLabel,
-  StepContent,
-  Chip,
+  Grid,
+  alpha,
   useTheme,
-  useMediaQuery,
+  Stack,
 } from '@mui/material';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
-const Milestone = ({ id, setActiveSection }) => {
+const Milestone = ({ id }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const milestones = [
     {
-      date: "23 MAR 2023",
-      event: "PROJECT PROPOSAL",
-      description: "The first pitch to the panel focused on methodology and technologies for EXAMPROCTER",
-      progress: "20%",
-      status: "completed"
+      date: '23 MAR 2023',
+      title: 'Project Proposal',
+      description:
+        'The initial concept pitch outlining methodology and technologies for EXAMPROCTER.',
+      completed: true,
     },
     {
-      date: "23 MAY 2023",
-      event: "PROGRESS PRESENTATION 1",
-      description: "Presented 50% progress of the EXAMPROCTER application to the panel",
-      progress: "50%",
-      status: "completed"
+      date: '23 MAY 2023',
+      title: 'Progress Presentation 1',
+      description:
+        '50% project completion milestone showcasing key backend modules and TinyML integration.',
+      completed: true,
     },
     {
-      date: "05 SEP 2023",
-      event: "PROGRESS PRESENTATION 2",
-      description: "Presented 90% completion of EXAMPROCTER application to the panel",
-      progress: "90%",
-      status: "completed"
+      date: '05 SEP 2023',
+      title: 'Progress Presentation 2',
+      description:
+        'Demonstrated 90% completion, integrating AI monitoring and live proctoring dashboard.',
+      completed: true,
     },
     {
-      date: "09 SEP 2023",
-      event: "POSTER PRESENTATION",
-      description: "Comprehensive graphical view of EXAMPROCTER shown to the audience",
-      progress: "95%",
-      status: "completed"
+      date: '09 SEP 2023',
+      title: 'Poster Presentation',
+      description:
+        'Comprehensive visual poster presenting system architecture and features.',
+      completed: true,
     },
     {
-      date: "30 OCT 2023",
-      event: "FINAL ASSESSMENT",
-      description: "System fully functional at 100% - ready for commercialization",
-      progress: "100%",
-      status: "current"
+      date: '30 OCT 2023',
+      title: 'Final Assessment & Viva',
+      description:
+        'Full deployment and demonstration of EXAMPROCTER’s complete capabilities.',
+      completed: true,
     },
-    {
-      date: "30 OCT 2023",
-      event: "VIVA",
-      description: "Individual assessment of each team member's understanding of the system",
-      progress: "100%",
-      status: "current"
-    }
   ];
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case 'completed': return 'success';
-      case 'current': return 'primary';
-      default: return 'default';
-    }
-  };
-
   return (
-    <Box id={id} className="section-spacing" sx={{ bgcolor: 'background.default' }}>
-      <Container maxWidth="xl">
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography variant="h2" fontWeight="bold" gutterBottom>
-            Project <span className="gradient-text">Milestones</span>
+    <Box
+      id={id}
+      sx={{
+        py: { xs: 10, md: 14 },
+        position: 'relative',
+        overflow: 'hidden',
+        background:
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)'
+            : 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
+      }}
+    >
+      {/* Glow Background */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '-15%',
+          left: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.primary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-10%',
+          right: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.secondary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
+        {/* Section Header */}
+        <Box sx={{ textAlign: 'center', mb: 10 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '2.5rem', md: '3.2rem' },
+              mb: 2,
+              background:
+                'linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Project Milestones
           </Typography>
-          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}>
-            Tracking our journey from concept to fully functional exam proctoring system
+          <Typography
+            variant="h6"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.7)'
+                  : 'text.secondary',
+              maxWidth: 750,
+              mx: 'auto',
+              lineHeight: 1.8,
+            }}
+          >
+            Our journey from concept to a fully functional AI-powered proctoring system
           </Typography>
         </Box>
 
-        {/* Desktop Timeline */}
-        {!isMobile && (
-          <Stepper orientation="vertical" sx={{ position: 'relative' }}>
-            {milestones.map((milestone, index) => (
-              <Step key={index} active={true} completed={milestone.status === 'completed'}>
-                <StepLabel
-                  StepIconProps={{
-                    sx: {
-                      color: milestone.status === 'current' ? 'primary.main' : 
-                            milestone.status === 'completed' ? 'success.main' : 'grey.400',
-                      width: 40,
-                      height: 40,
-                      fontSize: '1rem',
-                      fontWeight: 'bold',
-                    }
-                  }}
-                >
-                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                    <Typography variant="h6" fontWeight="bold" sx={{ mr: 2 }}>
-                      {milestone.event}
-                    </Typography>
-                    <Chip
-                      label={milestone.progress}
-                      color={getStatusColor(milestone.status)}
-                      size="small"
-                    />
-                  </Box>
-                </StepLabel>
-                <StepContent>
-                  <Card
-                    sx={{
-                      mb: 4,
-                      borderRadius: 3,
-                      border: `1px solid ${theme.palette.primary.light}20`,
-                      boxShadow: `0 4px 20px ${theme.palette.primary.light}20`,
-                    }}
-                  >
-                    <CardContent>
-                      <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                        {milestone.date}
-                      </Typography>
-                      <Typography variant="body1">
-                        {milestone.description}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </StepContent>
-              </Step>
-            ))}
-          </Stepper>
-        )}
+        {/* Vertical Timeline */}
+        <Box sx={{ position: 'relative', pl: { xs: 2, md: 6 } }}>
+          {/* Vertical Line */}
+          <Box
+            sx={{
+              position: 'absolute',
+              left: { xs: '8px', md: '50%' },
+              top: 0,
+              bottom: 0,
+              width: 3,
+              background: `linear-gradient(to bottom, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+              transform: { md: 'translateX(-50%)' },
+              borderRadius: 2,
+              zIndex: 0,
+            }}
+          />
 
-        {/* Mobile Timeline */}
-        {isMobile && (
-          <Box sx={{ position: 'relative' }}>
-            {/* Timeline line */}
-            <Box
+          {/* Timeline Items */}
+          {milestones.map((milestone, index) => (
+            <Grid
+              container
+              spacing={4}
+              key={index}
               sx={{
-                position: 'absolute',
-                left: 20,
-                top: 0,
-                bottom: 0,
-                width: 2,
-                bgcolor: 'primary.light',
-                opacity: 0.3,
+                mb: { xs: 8, md: 10 },
+                alignItems: 'center',
+                flexDirection:
+                  index % 2 === 0 ? 'row' : { xs: 'row', md: 'row-reverse' },
               }}
-            />
-            
-            {milestones.map((milestone, index) => (
-              <Box
-                key={index}
-                sx={{
-                  position: 'relative',
-                  pl: 6,
-                  mb: 4,
-                }}
-              >
-                {/* Timeline dot */}
+            >
+              {/* Marker */}
+              <Grid item xs={12} md={6} sx={{ position: 'relative' }}>
                 <Box
                   sx={{
                     position: 'absolute',
-                    left: 12,
-                    top: 8,
-                    width: 16,
-                    height: 16,
+                    left: { xs: 0, md: '50%' },
+                    top: 0,
+                    transform: {
+                      xs: 'translate(-50%, -10px)',
+                      md: 'translate(-50%, -10px)',
+                    },
+                    zIndex: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: 'white',
                     borderRadius: '50%',
-                    bgcolor: milestone.status === 'current' ? 'primary.main' : 
-                            milestone.status === 'completed' ? 'success.main' : 'grey.400',
-                    border: `3px solid ${theme.palette.background.paper}`,
-                    zIndex: 1,
-                  }}
-                />
-
-                <Card
-                  sx={{
-                    borderRadius: 3,
-                    border: `1px solid ${theme.palette.primary.light}20`,
-                    boxShadow: `0 4px 20px ${theme.palette.primary.light}20`,
+                    width: 50,
+                    height: 50,
+                    boxShadow: '0 0 0 8px rgba(99,102,241,0.1)',
                   }}
                 >
-                  <CardContent>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}>
-                      <Typography variant="h6" fontWeight="bold">
-                        {milestone.event}
-                      </Typography>
-                      <Chip
-                        label={milestone.progress}
-                        color={getStatusColor(milestone.status)}
-                        size="small"
-                      />
-                    </Box>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                      {milestone.date}
-                    </Typography>
-                    <Typography variant="body2">
-                      {milestone.description}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-            ))}
-          </Box>
-        )}
+                  {milestone.completed ? (
+                    <CheckCircleIcon
+                      sx={{ color: theme.palette.success.main, fontSize: 32 }}
+                    />
+                  ) : (
+                    <AccessTimeIcon
+                      sx={{ color: theme.palette.warning.main, fontSize: 32 }}
+                    />
+                  )}
+                </Box>
+              </Grid>
 
-        {/* Achievement Banner */}
+              {/* Card */}
+              <Grid item xs={12} md={6}>
+                <Card
+                  elevation={0}
+                  sx={{
+                    position: 'relative',
+                    p: 4,
+                    borderRadius: 4,
+                    background:
+                      theme.palette.mode === 'dark'
+                        ? alpha('#1e293b', 0.7)
+                        : alpha('#ffffff', 0.95),
+                    border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                    backdropFilter: 'blur(10px)',
+                    boxShadow:
+                      theme.palette.mode === 'dark'
+                        ? '0 6px 24px rgba(0,0,0,0.4)'
+                        : '0 6px 28px rgba(0,0,0,0.08)',
+                    transition: 'all 0.35s ease',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      boxShadow:
+                        '0 12px 40px rgba(99,102,241,0.25), 0 0 0 1px rgba(255,255,255,0.05)',
+                    },
+                  }}
+                >
+                  <Typography
+                    variant="overline"
+                    sx={{
+                      color: theme.palette.primary.main,
+                      fontWeight: 700,
+                      letterSpacing: 1,
+                    }}
+                  >
+                    {milestone.date}
+                  </Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      fontWeight: 800,
+                      mb: 1,
+                      mt: 1,
+                      color: 'text.primary',
+                    }}
+                  >
+                    {milestone.title}
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color:
+                        theme.palette.mode === 'dark'
+                          ? 'rgba(255,255,255,0.75)'
+                          : 'text.secondary',
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {milestone.description}
+                  </Typography>
+                </Card>
+              </Grid>
+            </Grid>
+          ))}
+        </Box>
+
+        {/* Completion Banner */}
         <Card
+          elevation={0}
           sx={{
-            mt: 6,
-            p: 4,
+            mt: 8,
+            p: { xs: 4, md: 6 },
             borderRadius: 4,
+            background:
+              theme.palette.mode === 'dark'
+                ? alpha('#1e293b', 0.7)
+                : alpha('#ffffff', 0.9),
+            border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
             textAlign: 'center',
-            background: `linear-gradient(135deg, ${theme.palette.success.main} 0%, ${theme.palette.info.main} 100%)`,
-            color: 'white',
-            boxShadow: `0 8px 32px ${theme.palette.success.light}40`,
+            backdropFilter: 'blur(8px)',
           }}
         >
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
-            🏆 Achievement Unlocked!
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 800,
+              mb: 2,
+              background:
+                'linear-gradient(90deg, #6366f1 0%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Journey Complete
           </Typography>
-          <Typography variant="h6" gutterBottom>
-            RuHET 2023 - International Research Conference
-          </Typography>
-          <Typography variant="body1" sx={{ opacity: 0.9 }}>
-            Research Paper Published in Journal of Innovations in Engineering and Technology
+          <Typography
+            variant="body1"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.8)'
+                  : 'text.secondary',
+              maxWidth: 700,
+              mx: 'auto',
+              lineHeight: 1.8,
+            }}
+          >
+            Each milestone represents a crucial step toward achieving our
+            vision — building an AI-driven proctoring solution that redefines
+            academic honesty and reliability in virtual assessments.
           </Typography>
         </Card>
       </Container>
+
+      <style>
+        {`
+          @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
     </Box>
   );
 };

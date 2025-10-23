@@ -6,302 +6,335 @@ import {
   Typography,
   Grid,
   Card,
-  CardContent,
-  Chip,
   alpha,
   useTheme,
-  Fade,
+  Divider,
+  Stack,
 } from '@mui/material';
-import { keyframes } from '@emotion/react';
+import ScienceIcon from '@mui/icons-material/Science';
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import PsychologyIcon from '@mui/icons-material/Psychology';
-import FingerprintIcon from '@mui/icons-material/Fingerprint';
-import NetworkCheckIcon from '@mui/icons-material/NetworkCheck';
-import AnalyticsIcon from '@mui/icons-material/Analytics';
 
 const Domain = ({ id }) => {
   const theme = useTheme();
 
-  const researchAreas = [
-    {
-      icon: <PsychologyIcon sx={{ fontSize: 40 }} />,
-      title: "AI Proctoring",
-      description: "Advanced artificial intelligence for real-time exam monitoring and suspicious behavior detection using computer vision and machine learning.",
-      technologies: ["Computer Vision", "Machine Learning", "Behavior Analysis", "Real-time Processing"]
-    },
-    {
-      icon: <FingerprintIcon sx={{ fontSize: 40 }} />,
-      title: "Identity Verification",
-      description: "Facial recognition and ID verification systems to ensure candidate authenticity and prevent impersonation.",
-      technologies: ["Facial Recognition", "OCR Technology", "Biometric Verification", "Liveness Detection"]
-    },
-    {
-      icon: <NetworkCheckIcon sx={{ fontSize: 40 }} />,
-      title: "Security Monitoring",
-      description: "Comprehensive device and network security monitoring during examinations to prevent cheating attempts.",
-      technologies: ["Network Security", "Device Monitoring", "Screen Recording", "Browser Lockdown"]
-    },
-    {
-      icon: <AnalyticsIcon sx={{ fontSize: 40 }} />,
-      title: "Analytics & Reporting",
-      description: "Detailed analytics and reporting systems for exam integrity assessment and performance insights.",
-      technologies: ["Data Analytics", "Real-time Reporting", "Performance Metrics", "Risk Assessment"]
-    }
+  const problems = [
+    'Maintaining academic integrity during online assessments.',
+    'Inadequate monitoring capabilities in current proctoring systems.',
+    'Identity fraud and multi-device cheating.',
+    'Poor scalability and lack of real-time behavioral analysis.',
+  ];
+
+  const gaps = [
+    'No comprehensive integration of AI and IoT for exam monitoring.',
+    'Limited emotion and attention analysis in existing systems.',
+    'Lack of mental-state detection and context awareness.',
+    'Absence of on-device TinyML inference for edge privacy.',
   ];
 
   return (
-    <Box id={id} className="section-py" sx={{ bgcolor: 'background.paper', position: 'relative' }}>
-      {/* Background Pattern */}
+    <Box
+      id={id}
+      sx={{
+        py: { xs: 10, md: 14 },
+        bgcolor:
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)'
+            : 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Glowing background orbs */}
       <Box
         sx={{
           position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: `radial-gradient(circle at 20% 80%, ${alpha(theme.palette.primary.main, 0.05)} 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, ${alpha(theme.palette.secondary.main, 0.05)} 0%, transparent 50%)`,
+          top: '-15%',
+          left: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.primary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-10%',
+          right: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.secondary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(120px)',
           zIndex: 0,
         }}
       />
 
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
-        <Fade in={true} timeout={800}>
-          <Box>
-            {/* Section Header */}
-            <Box sx={{ textAlign: 'center', mb: 8 }}>
-              <Typography variant="h2" fontWeight="bold" gutterBottom>
-                Research <span className="gradient-text">Domain</span>
-              </Typography>
-              <Typography variant="h6" color="text.secondary" sx={{ 
-                maxWidth: 600, 
-                mx: 'auto', 
-                lineHeight: 1.7,
-                fontSize: '1.2rem'
-              }}>
-                Advanced research in AI-powered exam proctoring and academic integrity preservation
-              </Typography>
-            </Box>
+        {/* Header */}
+        <Box sx={{ textAlign: 'center', mb: 10 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '2.5rem', md: '3.2rem' },
+              mb: 2,
+              background:
+                'linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Research Domain
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.7)'
+                  : 'text.secondary',
+              maxWidth: 850,
+              mx: 'auto',
+              lineHeight: 1.8,
+            }}
+          >
+            Our research explores the intersection of Artificial Intelligence,
+            TinyML, and behavioral analytics to enhance online exam integrity
+            through real-time monitoring and emotion-aware proctoring systems.
+          </Typography>
+        </Box>
 
-            {/* Abstract Section */}
+        {/* Abstract Section */}
+        <Card
+          elevation={0}
+          sx={{
+            p: { xs: 4, md: 6 },
+            mb: 10,
+            borderRadius: 4,
+            background:
+              theme.palette.mode === 'dark'
+                ? alpha('#1e293b', 0.7)
+                : alpha('#ffffff', 0.9),
+            border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+            backdropFilter: 'blur(8px)',
+            boxShadow:
+              theme.palette.mode === 'dark'
+                ? '0 4px 20px rgba(0,0,0,0.4)'
+                : '0 4px 20px rgba(0,0,0,0.06)',
+          }}
+        >
+          <Stack direction="row" alignItems="center" spacing={2} mb={3}>
+            <ScienceIcon
+              sx={{ fontSize: 36, color: theme.palette.primary.main }}
+            />
+            <Typography variant="h4" fontWeight={800}>
+              Abstract
+            </Typography>
+          </Stack>
+          <Typography
+            variant="body1"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.8)'
+                  : 'text.secondary',
+              lineHeight: 1.9,
+              fontSize: '1.05rem',
+            }}
+          >
+            This study introduces <strong>ExamProcter</strong>, an AI-powered
+            online proctoring solution that ensures academic integrity in remote
+            learning environments. It utilizes machine learning, computer
+            vision, and TinyML for on-device inference, enabling low-latency,
+            privacy-respecting, real-time monitoring. The system provides
+            multi-modal data analysis—combining facial recognition, eye-gaze
+            estimation, and device behavior patterns—to identify anomalies and
+            improve the reliability of online examinations.
+          </Typography>
+        </Card>
+
+        {/* Problem & Research Gap Section */}
+        <Grid container spacing={6} mb={10}>
+          {/* Research Problem */}
+          <Grid item xs={12} md={6}>
             <Card
+              elevation={0}
               sx={{
-                borderRadius: 4,
-                mb: 8,
                 p: 5,
-                background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.02)} 0%, ${alpha(theme.palette.primary.main, 0.05)} 100%)`,
-                border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                position: 'relative',
-                overflow: 'hidden',
+                borderRadius: 4,
+                height: '100%',
+                background:
+                  theme.palette.mode === 'dark'
+                    ? alpha('#1e293b', 0.6)
+                    : alpha('#ffffff', 0.95),
+                border: `1px solid ${alpha(theme.palette.error.main, 0.1)}`,
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-6px)',
+                  boxShadow:
+                    '0 12px 32px rgba(239,68,68,0.15), 0 0 0 1px rgba(255,255,255,0.05)',
+                },
               }}
             >
-              <Box
-                sx={{
-                  position: 'absolute',
-                  top: -20,
-                  right: -20,
-                  width: 120,
-                  height: 120,
-                  borderRadius: '50%',
-                  background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)} 0%, ${alpha(theme.palette.secondary.main, 0.1)} 100%)`,
-                }}
-              />
-              <CardContent sx={{ p: 0, position: 'relative', zIndex: 1 }}>
-                <Typography variant="h4" fontWeight="bold" gutterBottom color="primary.main">
-                  Abstract & Objectives
+              <Stack direction="row" alignItems="center" spacing={2} mb={2}>
+                <WarningAmberIcon
+                  sx={{ fontSize: 32, color: theme.palette.error.main }}
+                />
+                <Typography variant="h5" fontWeight={800}>
+                  Research Problem
                 </Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.8, mb: 3, fontSize: '1.1rem' }}>
-                  This research focuses on developing an advanced AI-powered exam proctoring system that ensures 
-                  academic integrity in remote learning environments. The system employs cutting-edge computer vision, 
-                  machine learning algorithms, and real-time monitoring to detect and prevent academic dishonesty 
-                  while maintaining a seamless user experience.
+              </Stack>
+              <Divider sx={{ mb: 2, borderColor: alpha('#fff', 0.1) }} />
+              {problems.map((text, index) => (
+                <Typography
+                  key={index}
+                  variant="body2"
+                  sx={{
+                    color:
+                      theme.palette.mode === 'dark'
+                        ? 'rgba(255,255,255,0.7)'
+                        : 'text.secondary',
+                    mb: 1.5,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    '&::before': {
+                      content: '"•"',
+                      color: theme.palette.error.main,
+                      fontWeight: 700,
+                    },
+                  }}
+                >
+                  {text}
                 </Typography>
-                <Grid container spacing={3}>
-                  {[
-                    "Real-time behavior analysis and anomaly detection",
-                    "Multi-factor identity verification system",
-                    "Comprehensive security monitoring framework",
-                    "Advanced analytics and reporting dashboard"
-                  ].map((objective, index) => (
-                    <Grid item xs={12} md={6} key={index}>
-                      <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 2 }}>
-                        <Box
-                          sx={{
-                            width: 24,
-                            height: 24,
-                            borderRadius: '50%',
-                            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            mr: 2,
-                            flexShrink: 0,
-                            mt: 0.5,
-                          }}
-                        >
-                          <Typography variant="body2" color="white" fontWeight="bold" fontSize="0.75rem">
-                            ✓
-                          </Typography>
-                        </Box>
-                        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                          {objective}
-                        </Typography>
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </CardContent>
+              ))}
             </Card>
+          </Grid>
 
-            {/* Problem & Gap Section */}
-            <Grid container spacing={4} sx={{ mb: 8 }}>
-              <Grid item xs={12} md={6}>
-                <Card
-                  className="hover-lift"
+          {/* Research Gap */}
+          <Grid item xs={12} md={6}>
+            <Card
+              elevation={0}
+              sx={{
+                p: 5,
+                borderRadius: 4,
+                height: '100%',
+                background:
+                  theme.palette.mode === 'dark'
+                    ? alpha('#1e293b', 0.6)
+                    : alpha('#ffffff', 0.95),
+                border: `1px solid ${alpha(theme.palette.warning.main, 0.1)}`,
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-6px)',
+                  boxShadow:
+                    '0 12px 32px rgba(245,158,11,0.15), 0 0 0 1px rgba(255,255,255,0.05)',
+                },
+              }}
+            >
+              <Stack direction="row" alignItems="center" spacing={2} mb={2}>
+                <PsychologyIcon
+                  sx={{ fontSize: 32, color: theme.palette.warning.main }}
+                />
+                <Typography variant="h5" fontWeight={800}>
+                  Research Gap
+                </Typography>
+              </Stack>
+              <Divider sx={{ mb: 2, borderColor: alpha('#fff', 0.1) }} />
+              {gaps.map((text, index) => (
+                <Typography
+                  key={index}
+                  variant="body2"
                   sx={{
-                    height: '100%',
-                    borderRadius: 4,
-                    p: 4,
-                    background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.03)} 0%, ${alpha(theme.palette.primary.main, 0.08)} 100%)`,
-                    border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                    color:
+                      theme.palette.mode === 'dark'
+                        ? 'rgba(255,255,255,0.7)'
+                        : 'text.secondary',
+                    mb: 1.5,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                    '&::before': {
+                      content: '"•"',
+                      color: theme.palette.warning.main,
+                      fontWeight: 700,
+                    },
                   }}
                 >
-                  <Typography variant="h4" fontWeight="bold" gutterBottom color="primary.main">
-                    Research Problem
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7, mb: 3 }}>
-                    With the rapid shift to online education, maintaining exam integrity has become a significant 
-                    challenge. Traditional proctoring methods are insufficient for remote environments, leading 
-                    to increased academic dishonesty and compromised assessment validity.
-                  </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                    Current solutions often lack comprehensive monitoring capabilities, real-time detection 
-                    accuracy, and user-friendly interfaces, creating a critical gap in the market for an 
-                    integrated, intelligent proctoring solution.
-                  </Typography>
-                </Card>
-              </Grid>
+                  {text}
+                </Typography>
+              ))}
+            </Card>
+          </Grid>
+        </Grid>
 
-              <Grid item xs={12} md={6}>
-                <Card
-                  className="hover-lift"
-                  sx={{
-                    height: '100%',
-                    borderRadius: 4,
-                    p: 4,
-                    background: `linear-gradient(135deg, ${alpha(theme.palette.secondary.main, 0.03)} 0%, ${alpha(theme.palette.secondary.main, 0.08)} 100%)`,
-                    border: `1px solid ${alpha(theme.palette.secondary.main, 0.1)}`,
-                  }}
-                >
-                  <Typography variant="h4" fontWeight="bold" gutterBottom color="secondary.main">
-                    Research Gap
-                  </Typography>
-                  <Box sx={{ mt: 3 }}>
-                    {[
-                      "Lack of integrated AI proctoring solutions with real-time analysis",
-                      "Limited accuracy in existing identity verification systems",
-                      "Insufficient behavioral analysis capabilities",
-                      "Poor user experience and system integration"
-                    ].map((gap, index) => (
-                      <Box key={index} sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                        <Box
-                          sx={{
-                            width: 32,
-                            height: 32,
-                            borderRadius: 3,
-                            background: `linear-gradient(135deg, ${theme.palette.success.main} 0%, ${theme.palette.info.main} 100%)`,
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            mr: 3,
-                            flexShrink: 0,
-                          }}
-                        >
-                          <Typography variant="body2" color="white" fontWeight="bold">
-                            {index + 1}
-                          </Typography>
-                        </Box>
-                        <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-                          {gap}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Box>
-                </Card>
-              </Grid>
-            </Grid>
-
-            {/* Research Areas */}
-            <Box>
-              <Typography variant="h3" fontWeight="bold" textAlign="center" gutterBottom sx={{ mb: 6 }}>
-                Research Areas
-              </Typography>
-              <Grid container spacing={4}>
-                {researchAreas.map((area, index) => (
-                  <Grid item xs={12} md={6} key={index}>
-                    <Card
-                      className="hover-lift"
-                      sx={{
-                        height: '100%',
-                        borderRadius: 4,
-                        p: 4,
-                        border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
-                        background: `linear-gradient(135deg, ${alpha('#ffffff', 0.8)} 0%, ${alpha('#ffffff', 0.9)} 100%)`,
-                        position: 'relative',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          position: 'absolute',
-                          top: 0,
-                          right: 0,
-                          width: 80,
-                          height: 80,
-                          background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)} 0%, ${alpha(theme.palette.secondary.main, 0.1)} 100%)`,
-                          borderRadius: '0 0 0 80px',
-                        }}
-                      />
-                      <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
-                        <Box
-                          sx={{
-                            color: theme.palette.primary.main,
-                            mr: 3,
-                            flexShrink: 0,
-                          }}
-                        >
-                          {area.icon}
-                        </Box>
-                        <Box sx={{ flex: 1 }}>
-                          <Typography variant="h5" fontWeight="bold" gutterBottom>
-                            {area.title}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, mb: 3 }}>
-                            {area.description}
-                          </Typography>
-                          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                            {area.technologies.map((tech, techIndex) => (
-                              <Chip
-                                key={techIndex}
-                                label={tech}
-                                size="small"
-                                sx={{
-                                  background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.1)} 0%, ${alpha(theme.palette.primary.main, 0.2)} 100%)`,
-                                  color: theme.palette.primary.main,
-                                  fontWeight: 500,
-                                  border: `1px solid ${alpha(theme.palette.primary.main, 0.2)}`,
-                                }}
-                              />
-                            ))}
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Box>
-          </Box>
-        </Fade>
+        {/* Tech Stack Highlight */}
+        <Card
+          elevation={0}
+          sx={{
+            p: { xs: 4, md: 6 },
+            borderRadius: 4,
+            background:
+              theme.palette.mode === 'dark'
+                ? alpha('#1e293b', 0.7)
+                : alpha('#ffffff', 0.9),
+            border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+            textAlign: 'center',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <LightbulbIcon
+            sx={{
+              fontSize: 40,
+              color: theme.palette.primary.main,
+              mb: 2,
+            }}
+          />
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 800,
+              mb: 2,
+              background:
+                'linear-gradient(90deg, #6366f1 0%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Technologies & Frameworks
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.8)'
+                  : 'text.secondary',
+              maxWidth: 800,
+              mx: 'auto',
+              lineHeight: 1.8,
+            }}
+          >
+            Our research utilizes <strong>TensorFlow Lite</strong> and{' '}
+            <strong>Edge Impulse</strong> for on-device TinyML model
+            deployment. The system is developed using{' '}
+            <strong>React.js</strong> (frontend),{' '}
+            <strong>Spring Boot</strong> (backend), and{' '}
+            <strong>Firebase</strong> for secure storage and real-time
+            monitoring.
+          </Typography>
+        </Card>
       </Container>
     </Box>
   );

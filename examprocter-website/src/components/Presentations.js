@@ -9,154 +9,277 @@ import {
   CardContent,
   Button,
   Chip,
+  Stack,
+  alpha,
   useTheme,
 } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import DownloadIcon from '@mui/icons-material/Download';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
 
-const Presentations = ({ id, setActiveSection }) => {
+const Presentations = ({ id }) => {
   const theme = useTheme();
 
   const presentations = [
     {
-      title: "PROJECT PROPOSAL",
-      date: "23 MAR 2023",
-      description: "Initial project pitch focusing on methodology and technologies",
-      status: "Completed",
-      duration: "30 mins"
+      title: 'Project Proposal',
+      date: '23 MAR 2023',
+      description:
+        'Initial project pitch focusing on methodology, research scope, and technological implementation of EXAMPROCTER.',
+      status: 'Completed',
+      duration: '30 mins',
     },
     {
-      title: "PROGRESS PRESENTATION 1",
-      date: "23 MAY 2023",
-      description: "50% progress presentation to the evaluation panel",
-      status: "Completed",
-      duration: "45 mins"
+      title: 'Progress Presentation 1',
+      date: '23 MAY 2023',
+      description:
+        'Showcased backend design, AI model prototype, and 50% implementation progress.',
+      status: 'Completed',
+      duration: '45 mins',
     },
     {
-      title: "PROGRESS PRESENTATION 2",
-      date: "05 SEP 2023",
-      description: "90% completion presentation demonstrating core features",
-      status: "Completed",
-      duration: "60 mins"
+      title: 'Progress Presentation 2',
+      date: '05 SEP 2023',
+      description:
+        'Demonstrated live system with full integration of proctoring, monitoring, and dashboard modules.',
+      status: 'Completed',
+      duration: '60 mins',
     },
     {
-      title: "FINAL PRESENTATION",
-      date: "30 OCT 2023",
-      description: "Final assessment with fully functional system demonstration",
-      status: "Upcoming",
-      duration: "75 mins"
-    }
+      title: 'Final Presentation',
+      date: '30 OCT 2023',
+      description:
+        'Comprehensive demonstration of final EXAMPROCTER platform, including deployment and evaluation results.',
+      status: 'Completed',
+      duration: '75 mins',
+    },
   ];
 
   return (
-    <Box id={id} className="section-spacing" sx={{ bgcolor: 'background.paper' }}>
-      <Container maxWidth="xl">
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography variant="h2" fontWeight="bold" gutterBottom>
-            Project <span className="gradient-text">Presentations</span>
+    <Box
+      id={id}
+      sx={{
+        py: { xs: 10, md: 14 },
+        background:
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)'
+            : 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Background Glow */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '-15%',
+          left: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.primary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-10%',
+          right: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.secondary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(120px)',
+          zIndex: 0,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
+        {/* Header */}
+        <Box sx={{ textAlign: 'center', mb: 10 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '2.5rem', md: '3.2rem' },
+              mb: 2,
+              background:
+                'linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Project Presentations
           </Typography>
-          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}>
-            Key milestones and presentations throughout our project development journey
+          <Typography
+            variant="h6"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.7)'
+                  : 'text.secondary',
+              maxWidth: 800,
+              mx: 'auto',
+              lineHeight: 1.8,
+            }}
+          >
+            Key milestones and presentation stages throughout the project journey.
           </Typography>
         </Box>
 
+        {/* Presentations Grid */}
         <Grid container spacing={4}>
           {presentations.map((presentation, index) => (
-            <Grid item xs={12} md={6} key={index}>
+            <Grid item xs={12} sm={6} md={3} key={index}>
               <Card
+                elevation={0}
                 sx={{
                   height: '100%',
                   borderRadius: 4,
-                  transition: 'all 0.3s ease',
-                  border: `1px solid ${theme.palette.divider}`,
+                  background:
+                    theme.palette.mode === 'dark'
+                      ? alpha('#1e293b', 0.7)
+                      : alpha('#ffffff', 0.95),
+                  border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                  boxShadow:
+                    theme.palette.mode === 'dark'
+                      ? '0 6px 24px rgba(0,0,0,0.4)'
+                      : '0 6px 28px rgba(0,0,0,0.08)',
+                  transition: 'all 0.35s ease',
                   '&:hover': {
                     transform: 'translateY(-8px)',
-                    boxShadow: `0 20px 40px ${theme.palette.primary.light}20`,
+                    boxShadow:
+                      '0 12px 36px rgba(99,102,241,0.25), 0 0 0 1px rgba(255,255,255,0.05)',
                   },
                 }}
               >
-                <CardContent sx={{ p: 4 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                    <Typography variant="h5" fontWeight="bold">
+                <CardContent>
+                  <Stack spacing={2} alignItems="center" textAlign="center">
+                    <Box
+                      sx={{
+                        width: 70,
+                        height: 70,
+                        borderRadius: 3,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                        color: 'white',
+                        boxShadow: `0 6px 20px ${alpha(
+                          theme.palette.primary.main,
+                          0.3
+                        )}`,
+                      }}
+                    >
+                      <SlideshowIcon sx={{ fontSize: 36 }} />
+                    </Box>
+
+                    <Typography
+                      variant="h6"
+                      sx={{ fontWeight: 700, color: 'text.primary' }}
+                    >
                       {presentation.title}
                     </Typography>
-                    <Chip
-                      label={presentation.status}
-                      color={presentation.status === 'Completed' ? 'success' : 'primary'}
-                    />
-                  </Box>
-                  
-                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-                    📅 {presentation.date} • ⏱️ {presentation.duration}
-                  </Typography>
-                  
-                  <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.6 }}>
-                    {presentation.description}
-                  </Typography>
 
-                  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-                    <Button
-                      variant="contained"
-                      startIcon={<PlayArrowIcon />}
-                      size="small"
-                      disabled={presentation.status !== 'Completed'}
+                    <Stack direction="row" spacing={1}>
+                      <Chip
+                        label={presentation.status}
+                        color="success"
+                        size="small"
+                        sx={{ fontWeight: 600 }}
+                      />
+                      <Chip
+                        label={presentation.duration}
+                        color="primary"
+                        variant="outlined"
+                        size="small"
+                        sx={{ fontWeight: 600 }}
+                      />
+                    </Stack>
+
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color:
+                          theme.palette.mode === 'dark'
+                            ? 'rgba(255,255,255,0.7)'
+                            : 'text.secondary',
+                        lineHeight: 1.7,
+                        minHeight: 60,
+                      }}
                     >
-                      Watch Recording
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      startIcon={<DownloadIcon />}
-                      size="small"
+                      {presentation.description}
+                    </Typography>
+
+                    <Typography
+                      variant="caption"
+                      sx={{
+                        color:
+                          theme.palette.mode === 'dark'
+                            ? 'rgba(255,255,255,0.5)'
+                            : 'text.secondary',
+                      }}
                     >
-                      Download Slides
-                    </Button>
-                  </Box>
+                      📅 {presentation.date}
+                    </Typography>
+
+                    <Stack
+                      direction={{ xs: 'column', sm: 'row' }}
+                      spacing={1}
+                      sx={{ mt: 2 }}
+                    >
+                      <Button
+                        variant="contained"
+                        startIcon={<PlayArrowIcon />}
+                        sx={{
+                          borderRadius: 3,
+                          textTransform: 'none',
+                          px: 3,
+                          py: 1,
+                          fontWeight: 700,
+                          background:
+                            'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                          '&:hover': {
+                            background:
+                              'linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%)',
+                          },
+                        }}
+                      >
+                        Watch
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        startIcon={<DownloadIcon />}
+                        sx={{
+                          borderRadius: 3,
+                          textTransform: 'none',
+                          px: 3,
+                          py: 1,
+                          fontWeight: 700,
+                          borderColor: 'rgba(255,255,255,0.3)',
+                          '&:hover': {
+                            borderColor: theme.palette.primary.main,
+                            color: theme.palette.primary.main,
+                          },
+                        }}
+                      >
+                        Download
+                      </Button>
+                    </Stack>
+                  </Stack>
                 </CardContent>
               </Card>
             </Grid>
           ))}
         </Grid>
-
-        {/* Presentation Progress */}
-        <Card
-          sx={{
-            mt: 6,
-            p: 4,
-            borderRadius: 4,
-            textAlign: 'center',
-            background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-            color: 'white',
-          }}
-        >
-          <Typography variant="h4" fontWeight="bold" gutterBottom>
-            Presentation Progress
-          </Typography>
-          <Typography variant="body1" sx={{ mb: 4, opacity: 0.9 }}>
-            75% of scheduled presentations completed successfully
-          </Typography>
-          <Box
-            sx={{
-              width: '100%',
-              height: 8,
-              bgcolor: 'rgba(255, 255, 255, 0.3)',
-              borderRadius: 4,
-              overflow: 'hidden',
-              mb: 2,
-            }}
-          >
-            <Box
-              sx={{
-                width: '75%',
-                height: '100%',
-                bgcolor: 'white',
-                borderRadius: 4,
-              }}
-            />
-          </Box>
-          <Typography variant="body2" sx={{ opacity: 0.8 }}>
-            3 of 4 presentations completed • Final presentation upcoming
-          </Typography>
-        </Card>
       </Container>
     </Box>
   );

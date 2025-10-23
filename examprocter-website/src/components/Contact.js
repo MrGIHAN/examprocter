@@ -1,288 +1,317 @@
 // src/components/Contact.js
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Container,
   Typography,
-  Grid,
-  Card,
-  CardContent,
   TextField,
   Button,
+  Grid,
+  Card,
+  Stack,
+  alpha,
   useTheme,
 } from '@mui/material';
-import SendIcon from '@mui/icons-material/Send';
-import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 
-const Contact = ({ id, setActiveSection }) => {
+const Contact = ({ id }) => {
   const theme = useTheme();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
-  };
-
-  const contactInfo = [
-    {
-      icon: <PhoneIcon />,
-      title: 'Phone',
-      value: '+94 71 539 1491',
-      description: 'Mon-Fri from 8am to 6pm'
-    },
-    {
-      icon: <EmailIcon />,
-      title: 'Email',
-      value: 'examprometersupport@gmail.com',
-      description: 'We reply within 24 hours'
-    },
-    {
-      icon: <LocationOnIcon />,
-      title: 'Address',
-      value: 'No.73/41, Waterrapete Road, Mount Lavinia',
-      description: 'Colombo, Sri Lanka'
-    }
-  ];
 
   return (
-    <Box id={id} className="section-spacing" sx={{ bgcolor: 'background.default' }}>
-      <Container maxWidth="xl">
-        <Box sx={{ textAlign: 'center', mb: 8 }}>
-          <Typography variant="h2" fontWeight="bold" gutterBottom>
-            Get In <span className="gradient-text">Touch</span>
+    <Box
+      id={id}
+      sx={{
+        py: { xs: 10, md: 14 },
+        background:
+          theme.palette.mode === 'dark'
+            ? 'linear-gradient(180deg, #0f172a 0%, #1e293b 100%)'
+            : 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Background Glows */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: '-15%',
+          left: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.primary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(100px)',
+          zIndex: 0,
+        }}
+      />
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: '-10%',
+          right: '-10%',
+          width: 400,
+          height: 400,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${alpha(
+            theme.palette.secondary.main,
+            0.12
+          )} 0%, transparent 70%)`,
+          filter: 'blur(120px)',
+          zIndex: 0,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
+        {/* Header */}
+        <Box sx={{ textAlign: 'center', mb: 10 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: '2.5rem', md: '3.2rem' },
+              mb: 2,
+              background:
+                'linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #10b981 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Get in Touch
           </Typography>
-          <Typography variant="h6" color="text.secondary" sx={{ maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}>
-            Have questions about EXAMPROCTER? We're here to help and would love to hear from you.
+          <Typography
+            variant="h6"
+            sx={{
+              color:
+                theme.palette.mode === 'dark'
+                  ? 'rgba(255,255,255,0.7)'
+                  : 'text.secondary',
+              maxWidth: 800,
+              mx: 'auto',
+              lineHeight: 1.8,
+            }}
+          >
+            Have questions or want to collaborate? We’d love to hear from you.
+            Send us a message or connect using the contact details below.
           </Typography>
         </Box>
 
+        {/* Contact Layout */}
         <Grid container spacing={6}>
-          {/* Contact Information */}
-          <Grid item xs={12} md={5}>
-            <Box>
-              <Typography variant="h4" fontWeight="bold" gutterBottom>
-                Contact Information
-              </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 4, lineHeight: 1.7 }}>
-                Reach out to us for any inquiries about our exam proctoring platform, 
-                partnership opportunities, or technical support.
-              </Typography>
-
-              <Box sx={{ spaceY: 3 }}>
-                {contactInfo.map((info, index) => (
-                  <Card
-                    key={index}
-                    sx={{
-                      mb: 2,
-                      borderRadius: 3,
-                      transition: 'all 0.3s ease',
-                      border: `1px solid ${theme.palette.divider}`,
-                      '&:hover': {
-                        transform: 'translateX(8px)',
-                        boxShadow: `0 8px 24px ${theme.palette.primary.light}20`,
-                      },
-                    }}
-                  >
-                    <CardContent sx={{ p: 3 }}>
-                      <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
-                        <Box
-                          sx={{
-                            width: 50,
-                            height: 50,
-                            borderRadius: 2,
-                            bgcolor: 'primary.light',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: 'white',
-                            flexShrink: 0,
-                          }}
-                        >
-                          {info.icon}
-                        </Box>
-                        <Box>
-                          <Typography variant="h6" fontWeight="bold" gutterBottom>
-                            {info.title}
-                          </Typography>
-                          <Typography variant="body1" fontWeight="medium" gutterBottom>
-                            {info.value}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {info.description}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                ))}
-              </Box>
-
-              {/* Social Links */}
-              <Box sx={{ mt: 4 }}>
-                <Typography variant="h6" fontWeight="bold" gutterBottom>
-                  Follow Our Journey
-                </Typography>
-                <Box sx={{ display: 'flex', gap: 2 }}>
-                  {['📘', '🐦', '💼', '📷'].map((icon, index) => (
-                    <Box
-                      key={index}
-                      sx={{
-                        width: 50,
-                        height: 50,
-                        borderRadius: 2,
-                        bgcolor: 'primary.light',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '1.5rem',
-                        cursor: 'pointer',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          bgcolor: 'primary.main',
-                          transform: 'scale(1.1)',
-                        },
-                      }}
-                    >
-                      {icon}
-                    </Box>
-                  ))}
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-
-          {/* Contact Form */}
+          {/* Form */}
           <Grid item xs={12} md={7}>
             <Card
+              elevation={0}
               sx={{
                 borderRadius: 4,
-                background: `linear-gradient(135deg, ${theme.palette.primary.light}08 0%, ${theme.palette.secondary.light}08 100%)`,
-                border: `1px solid ${theme.palette.primary.light}20`,
+                p: { xs: 4, md: 6 },
+                background:
+                  theme.palette.mode === 'dark'
+                    ? alpha('#1e293b', 0.7)
+                    : alpha('#ffffff', 0.95),
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                boxShadow:
+                  theme.palette.mode === 'dark'
+                    ? '0 6px 24px rgba(0,0,0,0.4)'
+                    : '0 6px 28px rgba(0,0,0,0.08)',
+                backdropFilter: 'blur(8px)',
               }}
             >
-              <CardContent sx={{ p: 4 }}>
-                <Typography variant="h4" fontWeight="bold" gutterBottom>
-                  Send us a Message
-                </Typography>
-                <form onSubmit={handleSubmit}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        fullWidth
-                        label="Full Name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            borderRadius: 2,
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                      <TextField
-                        fullWidth
-                        label="Email Address"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            borderRadius: 2,
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            borderRadius: 2,
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        multiline
-                        rows={4}
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            borderRadius: 2,
-                          },
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        size="large"
-                        startIcon={<SendIcon />}
-                        sx={{
-                          px: 4,
-                          py: 1.5,
-                          borderRadius: 2,
-                          fontSize: '1.1rem',
-                          fontWeight: 600,
-                          background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-                          boxShadow: `0 8px 24px ${theme.palette.primary.light}40`,
-                          '&:hover': {
-                            transform: 'translateY(-2px)',
-                            boxShadow: `0 12px 32px ${theme.palette.primary.light}60`,
-                          },
-                          transition: 'all 0.3s ease',
-                        }}
-                      >
-                        Send Message
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </form>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 3, textAlign: 'center' }}>
-                  We typically respond within 24 hours during business days.
-                </Typography>
-              </CardContent>
+              <Typography
+                variant="h5"
+                sx={{ fontWeight: 800, mb: 3, color: 'text.primary' }}
+              >
+                Send Us a Message
+              </Typography>
+              <Stack spacing={3}>
+                <TextField
+                  label="Full Name"
+                  fullWidth
+                  variant="outlined"
+                  InputProps={{
+                    sx: {
+                      borderRadius: 3,
+                      '&.Mui-focused fieldset': {
+                        borderColor: theme.palette.primary.main,
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  label="Email Address"
+                  fullWidth
+                  variant="outlined"
+                  type="email"
+                  InputProps={{
+                    sx: {
+                      borderRadius: 3,
+                      '&.Mui-focused fieldset': {
+                        borderColor: theme.palette.primary.main,
+                      },
+                    },
+                  }}
+                />
+                <TextField
+                  label="Message"
+                  fullWidth
+                  multiline
+                  minRows={4}
+                  variant="outlined"
+                  InputProps={{
+                    sx: {
+                      borderRadius: 3,
+                      '&.Mui-focused fieldset': {
+                        borderColor: theme.palette.primary.main,
+                      },
+                    },
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{
+                    mt: 1,
+                    px: 5,
+                    py: 1.5,
+                    borderRadius: 3,
+                    fontWeight: 700,
+                    textTransform: 'none',
+                    fontSize: '1.05rem',
+                    background:
+                      'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+                    '&:hover': {
+                      transform: 'translateY(-3px)',
+                      background:
+                        'linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%)',
+                    },
+                    transition: 'all 0.3s ease',
+                  }}
+                >
+                  Send Message
+                </Button>
+              </Stack>
+            </Card>
+          </Grid>
+
+          {/* Contact Info */}
+          <Grid item xs={12} md={5}>
+            <Card
+              elevation={0}
+              sx={{
+                height: '100%',
+                borderRadius: 4,
+                p: { xs: 4, md: 6 },
+                background:
+                  theme.palette.mode === 'dark'
+                    ? alpha('#1e293b', 0.7)
+                    : alpha('#ffffff', 0.95),
+                border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+                boxShadow:
+                  theme.palette.mode === 'dark'
+                    ? '0 6px 24px rgba(0,0,0,0.4)'
+                    : '0 6px 28px rgba(0,0,0,0.08)',
+                backdropFilter: 'blur(8px)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography
+                variant="h5"
+                sx={{
+                  fontWeight: 800,
+                  mb: 3,
+                  color: 'text.primary',
+                  textAlign: 'center',
+                }}
+              >
+                Contact Information
+              </Typography>
+
+              <Stack spacing={3}>
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <EmailIcon
+                    sx={{ color: theme.palette.primary.main, fontSize: 28 }}
+                  />
+                  <Box>
+                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                      examprocter@gmail.com
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color:
+                          theme.palette.mode === 'dark'
+                            ? 'rgba(255,255,255,0.7)'
+                            : 'text.secondary',
+                      }}
+                    >
+                      Official email address
+                    </Typography>
+                  </Box>
+                </Stack>
+
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <PhoneIcon
+                    sx={{ color: theme.palette.primary.main, fontSize: 28 }}
+                  />
+                  <Box>
+                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                      +94 71 123 4567
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color:
+                          theme.palette.mode === 'dark'
+                            ? 'rgba(255,255,255,0.7)'
+                            : 'text.secondary',
+                      }}
+                    >
+                      Mon–Fri, 9AM–5PM
+                    </Typography>
+                  </Box>
+                </Stack>
+
+                <Stack direction="row" alignItems="center" spacing={2}>
+                  <LocationOnIcon
+                    sx={{ color: theme.palette.primary.main, fontSize: 28 }}
+                  />
+                  <Box>
+                    <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                      University of Ruhuna, Sri Lanka
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color:
+                          theme.palette.mode === 'dark'
+                            ? 'rgba(255,255,255,0.7)'
+                            : 'text.secondary',
+                      }}
+                    >
+                      Faculty of Engineering
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Stack>
             </Card>
           </Grid>
         </Grid>
       </Container>
+
+      <style>
+        {`
+          @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+          }
+        `}
+      </style>
     </Box>
   );
 };
